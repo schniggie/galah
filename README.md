@@ -1,6 +1,7 @@
 ## Chnages in Fork:
 Changed OpenAI implemetation to support private Azure OpenAI instances
 
+---
 
 <img align="left" src="images/galah.png" width="210px">
 
