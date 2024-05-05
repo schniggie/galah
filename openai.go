@@ -19,9 +19,9 @@ func GenerateOpenAIResponse(cfg *Config, r *http.Request) (string, error) {
 		log.Fatal(err)
 	}
 	prompt := fmt.Sprintf(cfg.PromptTemplate, httpReq)
-
+	config := openai.DefaultAzureConfig(cfg.APIKey, cfg.Endpoint)
 	// Set up API call options
-	client := openai.NewClient(cfg.APIKey)
+	client := openai.NewClientWithConfig(config)
 	options := openai.ChatCompletionRequest{
 		Model: cfg.Model,
 		Messages: []openai.ChatCompletionMessage{
