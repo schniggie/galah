@@ -1,3 +1,7 @@
+## Chnages in Fork:
+Changed OpenAI implemetation to support private Azure OpenAI instances
+
+
 <img align="left" src="images/galah.png" width="210px">
 
 TL;DR: Galah (/ɡəˈlɑː/ - pronounced ‘guh-laa’) is an LLM (Large Language Model) powered web honeypot, currently compatible with the OpenAI API, that is able to mimic various applications and dynamically respond to arbitrary HTTP requests.
