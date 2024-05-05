@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	// TODO: Remove api_key from the config file. Set it as env var instead.
+	Endpoint       string               `yaml:"endpoint"`
 	APIKey         string               `yaml:"api_key"`
 	Model          string               `yaml:"model"`
 	PromptTemplate string               `yaml:"prompt_template"`
