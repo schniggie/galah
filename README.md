@@ -1,4 +1,4 @@
-## Chnages in Fork:
+## Changes in Fork:
 Changed OpenAI implemetation to support private Azure OpenAI instances
 
 ---
