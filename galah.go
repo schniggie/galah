@@ -19,6 +19,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"regexp"
 
 	"github.com/0x4d31/galah/enrich"
 	_ "github.com/mattn/go-sqlite3"
@@ -414,6 +415,12 @@ func getDBKey(r *http.Request, port string) string {
 	return port + "_" + r.URL.String()
 }
 
+func filterMarkdown(input string) string {
+    // Remove markdown code markers like ```json, ```
+    re := regexp.MustCompile("```\\w*\n?|```")
+    return re.ReplaceAllString(input, "")
+}
+
 func (app *App) generateAndCacheResponse(r *http.Request, port string) ([]byte, error) {
 	responseString, err := GenerateOpenAIResponse(app.Config, r)
 	if err != nil {
@@ -423,8 +430,8 @@ func (app *App) generateAndCacheResponse(r *http.Request, port string) ([]byte, 
 	if app.Verbose {
 		log.Println("Generated HTTP response:", responseString)
 	}
-
-	responseBytes := []byte(responseString)
+	filtered := filterMarkdown(responseString)
+        responseBytes := []byte(filtered)
 	DBKey := getDBKey(r, port)
 	currentTime := time.Now()
 	_, err = app.DB.Exec("INSERT OR REPLACE INTO cache (cachedAt, key, response) VALUES (?, ?, ?)", currentTime, DBKey, responseBytes)
